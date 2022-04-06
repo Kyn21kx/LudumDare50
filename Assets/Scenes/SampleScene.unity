@@ -505,6 +505,7 @@ GameObject:
   - component: {fileID: 1095553312}
   - component: {fileID: 1095553311}
   - component: {fileID: 1095553309}
+  - component: {fileID: 1095553313}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -604,6 +605,7 @@ MonoBehaviour:
   speed: 10
   accelerationBoostFactor: 2
   gravityModifier: 1
+  dashRef: {fileID: 0}
 --- !u!54 &1095553310
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -649,6 +651,19 @@ MonoBehaviour:
   dashSpeed: 190
   dashCooldown: 0.5
   dashDuration: 0.2
+--- !u!114 &1095553313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095553304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c480becd4db2724380284540500ea70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glidingSeconds: 1
 --- !u!1 &1602265112
 GameObject:
   m_ObjectHideFlags: 0

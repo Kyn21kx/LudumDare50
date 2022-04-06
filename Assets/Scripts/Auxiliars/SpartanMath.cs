@@ -47,6 +47,7 @@ namespace Auxiliars {
 			return from + (to - from) * t;
 		}
 
+
 		public static Vector3 Lerp(Vector3 from, Vector3 to, float t) {
 			Clamp(ref t, 0f, 1f);
 			return new Vector3(
@@ -68,6 +69,11 @@ namespace Auxiliars {
 			);
 		}
 
+		public static float InverseLerp(float from, float to, float t) {
+			Clamp(ref t, 0f, 1f);
+			return (t - from) / to - from;
+		}
+		
 		public static int Sign(float x) => x >= 0f ? 1 : -1;
 
 
