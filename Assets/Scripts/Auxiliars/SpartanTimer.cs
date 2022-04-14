@@ -34,6 +34,7 @@ namespace Auxiliars {
 		}
 
 		public void Start() {
+			if (Started) return;
 			switch (ReferenceTimeMode) {
 				case TimeMode.Fixed:
 					this.startingTime = Time.fixedTime;

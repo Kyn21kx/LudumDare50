@@ -11,10 +11,13 @@ public class Movement : MonoBehaviour {
 	#region Properties
 	public Rigidbody Rig { get; private set; }
 	public float PrevDirection { get; private set; }
-	public bool Grounded => Rig.velocity.y == 0f;	
+	public bool Grounded => Rig.velocity.y == 0f;
 	#endregion
 
 	#region Editor variables
+	[SerializeField]
+	private GameObject model;
+
 	[SerializeField]
 	private float speed;
 
@@ -44,7 +47,13 @@ public class Movement : MonoBehaviour {
 
 	private void Update() {
 		HandleInput();
+		Vector3 rot = model.transform.localRotation.eulerAngles;
 		if (currDirection == 0f) blend = 0f;
+		else if (currDirection > 0f)
+			rot.y = 90f;
+		else
+			rot.y = -90f;
+		model.transform.localRotation = Quaternion.Euler(rot);
 	}
 
 	private void FixedUpdate() {

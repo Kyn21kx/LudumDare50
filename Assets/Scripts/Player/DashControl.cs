@@ -16,15 +16,15 @@ public class DashControl : MonoBehaviour {
 	[SerializeField]
 	private float dashDuration;
 
+	private Movement movRef;
+
 	private SpartanTimer dashTimer;
 
 	public SpartanTimer DashDurationTimer => dashDurationTimer;
 
-	private bool dashedAirbone;
-
-	private Movement movRef;
-
 	private SpartanTimer dashDurationTimer;
+	
+	private bool dashedAirbone;
 
 	private void Start() {
 		movRef = GetComponent<Movement>();

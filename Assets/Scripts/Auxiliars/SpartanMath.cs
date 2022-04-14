@@ -26,6 +26,8 @@ namespace Auxiliars {
 
 		public static float Ln(float value) => (float)System.Math.Log(value);
 
+		public static float Log(float value, float n) => Ln(value) / Ln(n);
+
 		public static float Pow(float value, float power) => Exp(power * Ln(value));
 
 		public static float SmoothStart(float from, float to, float t, float n) {
@@ -77,5 +79,10 @@ namespace Auxiliars {
 		public static int Sign(float x) => x >= 0f ? 1 : -1;
 
 
+		public static float DistanceSqr(Vector3 a, Vector3 b) {
+			//So, let's substract, right?
+			Vector3 towards = a - b;
+			return towards.sqrMagnitude;
+		}
 	}
 }
