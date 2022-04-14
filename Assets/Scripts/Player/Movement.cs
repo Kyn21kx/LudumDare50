@@ -49,10 +49,11 @@ public class Movement : MonoBehaviour {
 		HandleInput();
 		Vector3 rot = model.transform.localRotation.eulerAngles;
 		if (currDirection == 0f) blend = 0f;
+		//Constantly rotate to the right
 		else if (currDirection > 0f)
-			rot.y = 90f;
+			rot.y += 200f * Time.deltaTime;
 		else
-			rot.y = -90f;
+			rot.y -= 200f * Time.deltaTime;
 		model.transform.localRotation = Quaternion.Euler(rot);
 	}
 

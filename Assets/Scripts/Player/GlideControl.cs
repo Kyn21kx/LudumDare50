@@ -65,7 +65,7 @@ public class GlideControl : MonoBehaviour {
 	}
 
 	private void HandleInput() {
-		this.Gliding = (Input.GetMouseButton(1) || Input.GetAxisRaw("Triggers") > 0f) && !movRef.Grounded;
+		this.Gliding = (Input.GetMouseButton(1) || Input.GetAxisRaw("Triggers") > 0f) && !movRef.Grounded && remainingGlidingSeconds > 0f;
 	}
 
 	private void ScaleUI() {
@@ -88,6 +88,7 @@ public class GlideControl : MonoBehaviour {
 		var particleModule = this.vfx.main;
 		if (!Gliding) {
 			particleModule.startSize = originalVfxSize;
+			//Create a copy, and leave it there to die
 			this.vfx.Clear();
 			this.vfx.Stop();
 			return;

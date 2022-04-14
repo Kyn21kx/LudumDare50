@@ -8,10 +8,20 @@ using Auxiliars;
 [RequireComponent(typeof(SpartanCamera))]
 public class CameraFollow : MonoBehaviour {
 
+	enum FollowMode {
+		LINEAR,
+		SMOOTH_START,
+		SMOOTH_STOP,
+		CONSTANT
+	}
+
 	public bool InDeadZone { get; private set; }
 
 	[SerializeField]
 	private UpdateModes updateMode;
+
+	[SerializeField]
+	private FollowMode followMode;
 
 	[SerializeField]
 	private float followSpeed;
@@ -50,12 +60,28 @@ public class CameraFollow : MonoBehaviour {
 			followingBlend = 0f;
 			return;
 		}
-		followingBlend += followSpeed * timeStep;
+
+		float addedT = followSpeed * timeStep;
+		followingBlend += addedT;
 		if (followingBlend > 1f)
 			followingBlend = 0f;
+
+		switch (followMode) {
+			case FollowMode.LINEAR:
+				transform.position = SpartanMath.Lerp(transform.position, camProperties.Target.position - offset, followingBlend);
+				break;
+			case FollowMode.SMOOTH_START:
+				transform.position = SpartanMath.SmoothStart(transform.position, camProperties.Target.position - offset, followingBlend, 2f);
+				break;
+			case FollowMode.SMOOTH_STOP:
+				transform.position = SpartanMath.SmoothStop(transform.position, camProperties.Target.position - offset, followingBlend, 2f);
+				break;
+			case FollowMode.CONSTANT:
+				transform.position = SpartanMath.Lerp(transform.position, camProperties.Target.position - offset, addedT);
+				break;
+		}
+
 		//Uncomment this if you want non linear camera returns :D
-		//transform.position = SpartanMath.SmoothStart(transform.position, camProperties.Target.position, followingBlend, exponentialReturn);
-		transform.position = SpartanMath.Lerp(transform.position, camProperties.Target.position - offset, followingBlend);
 	}
 
 	public bool IsInDeadZone(Vector3 target) {

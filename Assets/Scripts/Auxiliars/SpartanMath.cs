@@ -44,6 +44,21 @@ namespace Auxiliars {
 			);
 		}
 
+		public static float SmoothStop(float from, float to, float t, float n) {
+			float powerValue = 1f - Pow(1f - t, n);
+			return Lerp(from, to, powerValue);
+		}
+
+		public static Vector3 SmoothStop(Vector3 from, Vector3 to, float t, float n) {
+			float powerValue = 1f - Pow(1f - t, n);
+			Clamp(ref powerValue, 0f, 1f);
+			return new Vector3(
+				LerpUnclamped(from.x, to.x, powerValue),
+				LerpUnclamped(from.y, to.y, powerValue),
+				LerpUnclamped(from.z, to.z, powerValue)
+			);
+		}
+
 		public static float Lerp(float from, float to, float t) {
 			Clamp(ref t, 0f, 1f);
 			return from + (to - from) * t;
